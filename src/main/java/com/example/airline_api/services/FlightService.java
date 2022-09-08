@@ -10,13 +10,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class FlightServices {
+public class FlightService {
 
     @Autowired
     FlightRepository flightRepository;
 
-    public void addFlight(Flight flight) {
+    public Flight addFlight(Flight flight) {
         flightRepository.save(flight);
+        return flight;
     }
 
     public List<Flight> getAllFlights() {
