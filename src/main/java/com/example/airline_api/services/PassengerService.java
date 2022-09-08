@@ -28,23 +28,4 @@ public class PassengerService {
         return passengerRepository.findById(id);
     }
 
-    public List<Passenger> getAllBookedPassengers() {
-        List<Passenger> passengers = new ArrayList<>();
-        this.getAllPassengers().forEach(passenger -> {
-            if (passenger.getFlights().size() > 0) {
-                passengers.add(passenger);
-            }
-        });
-        return passengers;
-    }
-
-    public List<Passenger> getAllNotBookedPassengers() {
-        List<Passenger> passengers = new ArrayList<>();
-        this.getAllPassengers().forEach(passenger -> {
-            if (passenger.getFlights().size() == 0) {
-                passengers.add(passenger);
-            }
-        });
-        return passengers;
-    }
 }

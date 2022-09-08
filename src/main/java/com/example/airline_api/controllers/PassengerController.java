@@ -18,24 +18,15 @@ public class PassengerController {
     PassengerService passengerService;
 
     @GetMapping
-    public ResponseEntity<List<Passenger>> getAllPassengers(@RequestParam Optional<Boolean> hasBooking) {
-        List<Passenger> passengers;
-        if (hasBooking.isPresent()) {
-            passengers = passengerService.getAllBookedPassengers();
-        } else {
-            passengers = passengerService.getAllNotBookedPassengers();
-        }
+    public ResponseEntity<List<Passenger>> getAllPassengers() {
+        List<Passenger> passengers = passengerService.getAllPassengers();
         return new ResponseEntity<>(passengers, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Passenger> getPassengerById(@PathVariable int id) {
         Optional<Passenger> passenger = passengerService.getPassengerById(id);
-        if (passenger.isPresent()){
-            return new ResponseEntity<>(passenger.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
+        return passenger.isPresent() ? new ResponseEntity<>(passenger.get(), HttpStatus.OK) : new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
