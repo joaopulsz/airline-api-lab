@@ -3,6 +3,7 @@ package com.example.airline_api.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Flight {
     private String departureDate;
 
     @Column(name = "departure_time")
-    private String departureTime;
+    private Time departureTime;
 
     @ManyToMany
     @JoinTable(
@@ -34,7 +35,7 @@ public class Flight {
     @JsonIgnoreProperties({"flights"})
     private List<Passenger> passengers;
 
-    public Flight(String destination, int capacity, String departureDate, String departureTime) {
+    public Flight(String destination, int capacity, String departureDate, Time departureTime) {
         this.destination = destination;
         this.capacity = capacity;
         this.departureDate = departureDate;
@@ -77,11 +78,11 @@ public class Flight {
         this.departureDate = departureDate;
     }
 
-    public String getDepartureTime() {
+    public Time getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(String departureTime) {
+    public void setDepartureTime(Time departureTime) {
         this.departureTime = departureTime;
     }
 
