@@ -39,7 +39,7 @@ public class FlightController {
         return new ResponseEntity<>(newFlight, HttpStatus.CREATED);
     }
 
-    @PostMapping(value = "/{id}")
+    @PostMapping(value = "/{flightId}")
     public ResponseEntity<Flight> bookPassengerOntoFlightById(@PathVariable int flightId, @RequestParam int passengerId) {
         Optional<Flight> flight = flightService.getFlightById(flightId);
         Optional<Passenger> passenger = passengerService.getPassengerById(passengerId);

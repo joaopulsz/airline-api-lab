@@ -33,12 +33,11 @@ public class FlightService {
     }
 
     public Optional<Flight> bookPassengerOntoFlight(Flight flight, Passenger passenger) {
-        if (flight.getCapacity() >= flight.getPassengers().size()) {
+        if (flight.getCapacity() == flight.getPassengers().size()) {
             return null;
         } else {
             flight.getPassengers().add(passenger);
             passenger.getFlights().add(flight);
-            flightRepository.save(flight);
             passengerRepository.save(passenger);
             return Optional.of(flight);
         }
