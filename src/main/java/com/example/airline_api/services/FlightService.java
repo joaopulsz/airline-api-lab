@@ -7,6 +7,7 @@ import com.example.airline_api.repositories.PassengerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +46,16 @@ public class FlightService {
 
     public void cancelFlight(Flight flight) {
         flightRepository.delete(flight);
+    }
+
+    public List<Flight> getFlightsByDestination(String destination) {
+        List<Flight> flights = new ArrayList<>();
+        flightRepository.findAll().forEach(flight -> {
+            if (flight.getDestination().equalsIgnoreCase(destination)) {
+                flights.add(flight);
+            }
+        });
+        return flights;
     }
 
 }

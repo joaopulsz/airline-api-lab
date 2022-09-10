@@ -33,6 +33,12 @@ public class FlightController {
         return flight.isPresent() ? new ResponseEntity<>(flight.get(), HttpStatus.OK) : new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping(value = "/search/{destination}")
+    public ResponseEntity<List<Flight>> getFlightsByDestination(@PathVariable String destination) {
+        List<Flight> flights = flightService.getFlightsByDestination(destination);
+        return !flights.isEmpty() ? new ResponseEntity<>(flights, HttpStatus.OK) : new ResponseEntity<>(flights, HttpStatus.NOT_FOUND);
+    }
+
     @PostMapping
     public ResponseEntity<Flight> createNewFlight(@RequestBody Flight flight) {
         Flight newFlight = flightService.addFlight(flight);
@@ -62,6 +68,5 @@ public class FlightController {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
-
 
 }
